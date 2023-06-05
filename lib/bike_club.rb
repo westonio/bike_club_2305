@@ -16,4 +16,10 @@ class BikeClub
       biker.rides.values.flatten.length
     end
   end
+
+  def biker_best_time(ride)
+    @bikers.min_by do |biker|
+      biker.personal_record(ride)
+    end
+  end
 end
