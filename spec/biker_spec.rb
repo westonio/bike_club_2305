@@ -66,6 +66,8 @@ RSpec.describe Biker do
   end
 
   it 'returns personal record for ride' do
+    @biker.learn_terrain!(:gravel)
+    @biker.learn_terrain!(:hills)
     ride1 = Ride.new({name: "Walnut Creek Trail", distance: 10.7, loop: false, terrain: :hills})
     @biker.log_ride(ride1, 92.5)
     @biker.log_ride(ride1, 91.1)
@@ -78,10 +80,12 @@ RSpec.describe Biker do
   end
 
   it 'returns false if ride cannot be achieved' do
+    @biker2.learn_terrain!(:gravel)
+    @biker2.learn_terrain!(:hills)
     ride1 = Ride.new({name: "Walnut Creek Trail", distance: 10.7, loop: false, terrain: :hills})
     ride2 = Ride.new({name: "Town Lake", distance: 14.9, loop: true, terrain: :gravel})
-    @biker2.log_ride(ride1, 92.5)
-    @biker2.log_ride(ride1, 91.1)
+    @biker2.log_ride(ride1, 95.0)
+    @biker2.log_ride(ride2, 65.0)
    
     expect(@biker2.personal_record(ride1)).to eq(false)
     expect(@biker2.personal_record(ride2)).to eq(65.0)
