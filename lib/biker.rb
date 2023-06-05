@@ -19,10 +19,12 @@ class Biker
     add_ride(ride, time) if can_ride?(ride)
   end
 
+  # This is a helper for log_ride and for method in BikeClub class
   def can_ride?(ride)
     ride.total_distance <= @max_distance && @acceptable_terrain.include?(ride.terrain)
   end 
 
+  # This is a helper for log_ride
   def add_ride(ride, time)
     if @rides.has_key?(ride)
       @rides[ride].push(time)
