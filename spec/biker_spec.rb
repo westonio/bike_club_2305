@@ -31,6 +31,24 @@ RSpec.describe Biker do
     expect(@biker.acceptable_terrain).to eq([:gravel, :hills])
   end
 
+  it 'can determine if ride achievable (distance and terrain)' do
+    ride1 = Ride.new({name: "Walnut Creek Trail", distance: 10.7, loop: false, terrain: :hills})
+    ride2 = Ride.new({name: "Town Lake", distance: 14.9, loop: true, terrain: :gravel})
+    ride3 = Ride.new({name: "Manitou Incline", distance: 12.2, loop: true, terrain: :incline})
+    @biker2.learn_terrain!(:gravel)
+    @biker2.learn_terrain!(:hills)
+
+    expect(@biker2.can_ride?(ride1)).to be(false) #total distance over max distance
+    expect(@biker2.can_ride?(ride2)).to be(true) #knows terrain and distsnace is in range
+    expect(@biker2.can_ride?(ride3)).to be(false) #does not know terrain
+  end
+
+  it 'can add rides' do
+    ride1 = Ride.new({name: "Walnut Creek Trail", distance: 10.7, loop: false, terrain: :hills})
+    
+    expect(@biker.add_ride(ride1, 92.5)).to eq([92.5])
+  end
+
   it 'can log rides' do
     ride1 = Ride.new({name: "Walnut Creek Trail", distance: 10.7, loop: false, terrain: :hills})
     ride2 = Ride.new({name: "Town Lake", distance: 14.9, loop: true, terrain: :gravel})
