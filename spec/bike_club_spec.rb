@@ -79,8 +79,8 @@ RSpec.describe BikeClub do
     ride2 = Ride.new({name: "Town Lake", distance: 14.9, loop: true, terrain: :gravel})
     ride3 = Ride.new({name: "Manitou Incline", distance: 18.6, loop: false, terrain: :hills})
 
-    expect(@club.eligible_bikers(ride1)).to eq([kenny, sara])
-    expect(@club.eligible_bikers(ride2)).to eq([kenny, athena])
-    expect(@club.eligible_bikers(ride3)).to eq([])
+    expect(@club.eligible_bikers(ride1)).to eq([kenny, sara]) #athena ineligible due to distance
+    expect(@club.eligible_bikers(ride2)).to eq([kenny, athena]) #sara ineligible due to terrain not learned
+    expect(@club.eligible_bikers(ride3)).to eq([]) # no one eligible
   end
 end
