@@ -22,4 +22,10 @@ class BikeClub
       biker.personal_record(ride)
     end
   end
+
+  def eligible_bikers(ride)
+    @bikers.select do |biker|
+      biker.can_ride?(ride)
+    end
+  end
 end
